@@ -1,0 +1,441 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --------------------------------------------------------
+% Tau
+% LaTeX Template
+% Version 2.4.3 (01/09/2024)
+%
+% Author: 
+% Guillermo Jimenez (memo.notess1@gmail.com)
+% 
+% License:
+% Creative Commons CC BY 4.0
+% --------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[9pt,a4paper,twoside]{tau-class/tau}
+\usepackage{caption}
+\usepackage[utf8]{inputenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shadows,shapes.geometric}
+\captionsetup[table]{position=bottom}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usetikzlibrary{fit,shadows}
+\usetikzlibrary{shapes.geometric,shapes.misc}
+
+%----------------------------------------------------------
+% TITLE
+%----------------------------------------------------------
+
+\journalname{CoMe Project Proposal --- Computational Mechanics}
+\title{Buckling Analysis of Cylindrical Shells using\\
+Bogner-Fox-Schmit (BFS) Elements}
+
+%----------------------------------------------------------
+% AUTHORS, AFFILIATIONS AND PROFESSOR
+%----------------------------------------------------------
+
+\author[a,1]{Siddharthan Somasundaram (Matriculation No.: 254304)}
+
+%----------------------------------------------------------
+
+\affil[a]{Otto-von-Guericke-Universit\"{a}t Magdeburg, Germany}
+
+\professor{Supervisor: Dr.-Ing.\ Sascha Eisentr\"{a}ger \quad
+Institute of Materials, Technologies and Mechanics --- Computational Mechanics \quad
+Prof.\ Dr.-Ing.\ Daniel Juhre}
+
+%----------------------------------------------------------
+% FOOTER INFORMATION
+%----------------------------------------------------------
+
+\institution{Otto-von-Guericke-Universit\"{a}t Magdeburg, Germany}
+\footinfo{Version 1.0}
+\theday{\today}
+\leadauthor{Siddharthan Somasundaram}
+\course{CoMe Project --- Computational Mechanics (2025)}
+
+%----------------------------------------------------------
+% ABSTRACT AND KEYWORDS
+%----------------------------------------------------------
+
+\begin{abstract}
+This project proposes the implementation and validation of a linear buckling
+analysis framework for cylindrical shells using the classical
+Bogner-Fox-Schmit (BFS) finite element. BFS elements are $C^1$-continuous
+plate and shell elements constructed from bi-cubic Hermitian polynomials,
+making them well-suited for thin-shell stability problems. Building upon an
+existing validated Matlab code base for BFS-based flat plate analysis, this
+work extends the formulation to cylindrical shell geometry through three
+structured phases: the derivation of the cylindrical shell element with
+48~degrees of freedom per element; the implementation of a pre-buckling
+in-plane stress solver; and the assembly of the geometric stiffness matrix
+required for eigenvalue-based buckling analysis. The project targets a
+simply-supported cylindrical shell under uniform axial compression and
+validates the computed critical buckling load against the classical Donnell
+analytical solution and Ansys reference results. This work constitutes the
+direct computational foundation for the subsequent Master's thesis, which
+will extend the methodology to cylindrical shells with multiple cutouts
+using the Cut-BFS (CutBFS) approach based on the Finite Cell Method.
+\end{abstract}
+
+\keywords{Bogner-Fox-Schmit elements, cylindrical shell, buckling analysis,
+geometric stiffness, Finite Cell Method, CutBFS}
+
+%----------------------------------------------------------
+
+\begin{document}
+		
+    \maketitle 
+    \thispagestyle{firststyle}
+    \tauabstract 
+    \tableofcontents
+    \linenumbers 
+
+%----------------------------------------------------------
+\section{Introductory Paragraph}
+%----------------------------------------------------------
+
+\subsection{Problem Statement and Importance}
+
+\taustart{T}hin-walled cylindrical shell structures are fundamental
+load-bearing components in modern engineering applications, including
+aerospace fuselages, rocket bodies, submarine pressure hulls, and offshore
+pipelines. Under axial compressive loading, these structures are susceptible
+to a sudden and catastrophic loss of stability known as \emph{buckling} ---
+a failure mode that is particularly dangerous because it occurs abruptly,
+often at load levels well below the material yield strength. The accurate
+prediction of the critical buckling load and the associated deformation mode
+shape is therefore an essential requirement in the structural design and
+certification of such components~\cite{timoshenko1961,abaqus2009}.
+
+The Bogner-Fox-Schmit (BFS) element, introduced in 1965, is a
+high-efficiency $C^1$-continuous finite element based on a bi-cubic
+Hermitian polynomial approximation~\cite{bogner1965}. This continuity
+property makes it particularly well-suited for the analysis of thin shells
+under bending and buckling, as it analytically satisfies slope continuity
+between adjacent elements without penalty or Lagrange multiplier techniques.
+Despite its proven accuracy and implementation simplicity, the BFS element
+has seen limited application in modern structural analysis, primarily because
+its requirement for a structured rectangular mesh restricts its direct use on
+geometrically complex structures. Extending the BFS element to cylindrical
+shell geometries represents a natural and important step towards broader
+application in engineering practice~\cite{eisentraeger2022}.
+
+\subsection{Scope of the Project}
+
+This project implements and validates a linear buckling analysis framework
+for cylindrical shells using BFS elements. The work builds directly upon an
+existing validated Matlab code base for BFS-based plate analysis
+\cite{eisentraeger2022} and extends it to curved shell geometry through
+three structured phases:
+%
+\begin{enumerate}
+    \item Formulation and implementation of the cylindrical BFS shell element
+          with 48 degrees of freedom per element (12 per node, accounting for
+          three displacement components);
+    \item Development of the pre-buckling in-plane (membrane) stress solver;
+    \item Construction and assembly of the geometric stiffness matrix
+          $\mathbf{K}_G$ required for eigenvalue-based buckling analysis.
+\end{enumerate}
+%
+The project considers a simply-supported cylindrical shell under uniform
+axial compression --- the canonical benchmark for shell buckling --- and
+validates results against the classical Donnell analytical solution. This
+work constitutes the direct computational foundation for the subsequent
+Master's thesis, which will extend the methodology to cylindrical shells
+with multiple cutouts using the CutBFS approach.
+
+%----------------------------------------------------------
+\section{Brief State of the Art}
+%----------------------------------------------------------
+
+\subsection{Review of Relevant Literature}
+
+Linear buckling analysis of cylindrical shells has a long history in
+structural mechanics. The classical analytical solution for a
+simply-supported cylindrical shell under axial compression, derived from
+Donnell's shallow shell equations, provides the reference critical stress
+\cite{timoshenko1961}:
+%
+\begin{equation}
+    \sigma_{\mathrm{cr}} 
+    = \frac{E}{\sqrt{3\left(1-\nu^2\right)}} \cdot \frac{h}{R},
+    \label{eq:donnell}
+\end{equation}
+%
+where $E$ is Young's modulus, $\nu$ is Poisson's ratio, $h$ is the wall
+thickness, and $R$ is the cylinder radius. This expression remains the
+primary benchmark for numerical methods. Finite element analysis of shell
+buckling has advanced significantly, with commercial codes such as Abaqus and
+Ansys offering robust shell element formulations validated against
+experimental data~\cite{abaqus2009}.
+
+The original BFS element formulation for cylindrical shells was proposed by
+Bogner, Fox and Schmit themselves~\cite{bogner1965}, demonstrating the
+element's suitability for curved geometries. More recently,
+Eisentr\"{a}ger~et~al.~\cite{eisentraeger2022} demonstrated that BFS
+elements, when combined with the Finite Cell Method (FCM) in the so-called
+CutBFS approach, can accurately predict the critical buckling load of
+rectangular plates with multiple cutouts. The CutBFS method replaces the
+geometry-conforming mesh requirement with a structured Cartesian background
+mesh, thereby retaining the accuracy and simplicity of BFS elements while
+enabling the analysis of geometrically complex structures. In a complementary
+development, Burman~et~al.~\cite{burman2020} established the mathematical
+foundation for cut BFS elements and proved optimal convergence rates in the
+context of plate bending. Furthermore, the Shell Finite Cell Method
+\cite{shellFCM2011} demonstrated that fictitious domain approaches can be
+generalised to thin-walled shell structures using high-order $p$-version
+elements; however, no equivalent framework based on the $C^1$-continuous BFS
+element has been developed for cylindrical shell geometries.
+
+\subsection{Identified Gap}
+
+The central gap in the existing literature is the absence of a validated,
+open-source BFS-based buckling analysis framework for cylindrical shells.
+While BFS plate buckling has been comprehensively studied~\cite{eisentraeger2022},
+and while cylindrical shell buckling has been analysed using alternative finite
+element formulations~\cite{timoshenko1961,abaqus2009}, the combination of
+BFS elements with cylindrical shell geometry and buckling analysis has not
+been implemented or validated in a modern Matlab environment. This project
+directly addresses this gap and provides the validated shell code base
+required for the CutBFS cylinder extension in the Master's thesis.
+
+%----------------------------------------------------------
+\section{Open Research Question}
+%----------------------------------------------------------
+
+The central research question of this project is:
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, rounded corners]
+\textit{Can BFS elements, implemented within the existing CutBFS Matlab
+framework, accurately predict the critical buckling load and mode shape of a
+simply-supported cylindrical shell under axial compression, and be validated
+against the classical Donnell analytical solution?}
+\end{tcolorbox}
+
+\noindent This overarching question is addressed through three specific and
+graduated sub-questions:
+
+\begin{enumerate}
+    \item \textbf{Pre-buckling stress:} What is the in-plane membrane stress
+    distribution in the cylindrical shell wall under a unit axial compressive
+    load, and does the BFS-based plane stress solver reproduce the expected
+    uniform stress state?
+
+    \item \textbf{Critical load:} What is the critical load factor $\lambda$
+    predicted by the BFS eigenvalue analysis, and how does it compare to the
+    Donnell analytical solution given in Equation~\eqref{eq:donnell}?
+
+    \item \textbf{Mode shape:} What is the first buckling mode shape (number
+    of axial half-waves $m$ and circumferential waves $n$), and does it match
+    the analytically predicted wave pattern?
+\end{enumerate}
+
+%----------------------------------------------------------
+\section{Methodology}
+%----------------------------------------------------------
+
+\subsection{Objectives and Techniques}
+
+The project is structured into four implementation phases, each building
+directly on the previous:
+
+\paragraph{Phase 1 --- Cylinder geometry and mesh.}
+The cylindrical shell of radius $R$, length $L$, and wall thickness $h$ is
+\emph{unfolded} into a rectangular domain using the coordinate transformation
+$x$ (axial direction) and $y = R\theta$ (circumferential direction). A
+structured rectangular mesh is generated, enabling direct reuse of the
+existing BFS element infrastructure. The 48-DOF per element formulation is
+adopted, with each of the three displacement components ($u$, $v$, $w$)
+carrying four Hermitian DOFs per node:
+%
+\begin{equation}
+    f_i,\quad
+    \left(\frac{\partial f}{\partial x}\right)_i,\quad
+    \left(\frac{\partial f}{\partial y}\right)_i,\quad
+    \left(\frac{\partial^2 f}{\partial x\,\partial y}\right)_i,
+    \quad f \in \{u,\,v,\,w\}.
+    \label{eq:dofs}
+\end{equation}
+
+\paragraph{Phase 2 --- Pre-buckling in-plane stress analysis.}
+A 32-DOF plane stress stiffness matrix $\mathbf{K}_{\mathrm{plane}}$ is
+assembled using the BFS shape functions for the in-plane displacement
+components $u$ and $v$. A unit axial compressive load is applied as
+energetically equivalent nodal forces at the cylinder ends. The resulting
+membrane stress resultants $(\tilde{N}_x,\,\tilde{N}_y,\,\tilde{N}_{xy})$
+are computed at each integration point and stored for Phase~3:
+%
+\begin{equation}
+    \mathbf{K}_{\mathrm{plane}}\,\mathbf{U}_{\mathrm{ref}}
+    = \mathbf{F}_{\mathrm{edge}}.
+    \label{eq:prestress}
+\end{equation}
+
+\paragraph{Phase 3 --- Geometric stiffness and buckling eigenvalue.}
+The geometric (initial-stress) stiffness matrix $\mathbf{K}_G$ is assembled
+by integrating the product of the BFS shape function gradients and the
+pre-buckling membrane stress tensor over each element:
+%
+\begin{equation}
+    \mathbf{k}_G^{(e)} 
+    = \int_{-1}^{1}\int_{-1}^{1}
+      \mathbf{L}_g^\top\,\boldsymbol{\Sigma}\,\mathbf{L}_g\,
+      \det(\mathbf{J})\,\mathrm{d}\xi\,\mathrm{d}\eta,
+    \label{eq:KG}
+\end{equation}
+%
+where $\mathbf{L}_g$ is the gradient operator applied to the BFS shape
+functions and $\boldsymbol{\Sigma}$ is the pre-buckling stress matrix. The
+generalised eigenvalue problem
+%
+\begin{equation}
+    \left(\mathbf{K}_{\mathrm{bending}} + \lambda\,\mathbf{K}_G\right)
+    \boldsymbol{\Phi} = \mathbf{0}
+    \label{eq:eig}
+\end{equation}
+%
+is solved using Matlab's \texttt{eigs} function to extract the critical load
+factor $\lambda$ and the corresponding mode shape $\boldsymbol{\Phi}$.
+
+\paragraph{Phase 4 --- Validation and post-processing.}
+The computed critical load is compared against the Donnell analytical
+solution (Eq.~\eqref{eq:donnell}). Convergence with respect to mesh
+refinement is assessed. The buckling mode shape is visualised using
+Matlab's \texttt{surf} command and compared qualitatively against the
+analytically predicted diamond patterns.
+
+\subsection{Simulation Tools}
+
+All implementation is carried out in Matlab, extending the existing BFS
+plate code provided by the research group~\cite{eisentraeger2022}. No
+commercial finite element software is used for the primary analysis; Ansys
+Mechanical is employed solely as an independent reference for
+cross-validation of the critical buckling load.
+
+\subsection{Anticipated Limitations}
+
+The analysis is restricted to \emph{linear} (classical) buckling, which
+neglects geometric nonlinearities and initial imperfections known to
+significantly reduce the actual buckling load of cylindrical shells in
+practice. The simply-supported boundary condition is assumed throughout;
+clamped or free-edge conditions are not considered in this project but are
+identified as natural extensions. Cutouts are explicitly excluded from this
+project scope and are reserved for the Master's thesis.
+
+%----------------------------------------------------------
+\section{Outcome}
+%----------------------------------------------------------
+
+\subsection{Planned Results}
+
+The expected technical outcomes of this project are:
+%
+\begin{itemize}
+    \item A validated Matlab implementation of the 48-DOF cylindrical BFS
+          shell element, including the pre-buckling plane stress solver and
+          the geometric stiffness matrix $\mathbf{K}_G$.
+    \item A convergence study demonstrating that the BFS-based critical
+          buckling load converges to the Donnell analytical solution with
+          mesh refinement, with a target accuracy of less than~5\%.
+    \item Contour plots of the pre-buckling membrane stress distribution,
+          confirming the expected uniform axial stress state under end
+          compression.
+    \item Visualisation of the first buckling mode shape on the cylindrical
+          surface, showing the characteristic diamond pattern with the
+          analytically predicted wave numbers $m$ and $n$.
+    \item A parametric study of the effect of the radius-to-thickness ratio
+          $R/h$ on the critical buckling load, comparing BFS results
+          against the analytical formula and Ansys reference solutions.
+\end{itemize}
+
+\subsection{Contribution to Knowledge}
+
+This project provides the first validated implementation of BFS shell
+elements for cylindrical shell buckling analysis within the existing CutBFS
+Matlab framework. It establishes a tested and documented code base that
+directly enables the Master's thesis extension to cylindrical shells with
+multiple cutouts using the CutBFS method. The parametric validation against
+analytical and commercial FEM solutions provides confidence in the
+correctness of the implementation and quantifies the accuracy of the BFS
+element for this class of problem.
+
+%----------------------------------------------------------
+\section{Conclusion}
+%----------------------------------------------------------
+
+This project proposes the implementation and validation of a linear buckling
+analysis framework for cylindrical shells using Bogner-Fox-Schmit elements,
+extending an existing validated Matlab code base for BFS plate analysis. The
+work is strategically scoped as the direct computational foundation for the
+subsequent Master's thesis on CutBFS-based buckling analysis of cylindrical
+shells with multiple cutouts.
+
+By completing this project, the key missing components --- the 48-DOF
+cylindrical shell element, the pre-buckling plane stress solver, and the
+geometric stiffness matrix $\mathbf{K}_G$ --- will be implemented and
+validated, leaving the thesis to focus on the novel CutBFS extension with
+cutout handling and parametric optimisation. The immediate next step is a
+detailed study of the existing plate code structure alongside the
+mathematical roadmap document provided by the supervisor, before
+implementation begins in Matlab.
+
+%----------------------------------------------------------
+% BIBLIOGRAPHY
+%----------------------------------------------------------
+
+\begin{thebibliography}{9}
+
+\bibitem{timoshenko1961}
+S.~Timoshenko, J.~Gere,
+\textit{Theory of Elastic Stability}, 2nd~ed.
+McGraw-Hill, New York, 1961.
+
+\bibitem{abaqus2009}
+Dassault Syst\`{e}mes Simulia Corp.,
+\textit{Abaqus Theory Manual}, vol.~6.6, sec.~3.6.4.
+Providence, RI, USA, 2009.
+
+\bibitem{bogner1965}
+F.~K.~Bogner, R.~L.~Fox, L.~A.~Schmit,
+``The generation of interelement compatible stiffness and mass matrices
+by the use of interpolation formulae,''
+in \textit{Proc.\ 1st Conf.\ Matrix Methods in Structural Mechanics},
+Wright Patterson AF Base, Ohio, 1965, pp.~397--444.
+
+\bibitem{eisentraeger2022}
+S.~Eisentr\"{a}ger, J.~Kiendl, G.~Michaloudis, R.~Duy, Y.~Vetyukov,
+``Stability analysis of plates using cut Bogner-Fox-Schmit elements,''
+\textit{Computers \& Structures}, vol.~270, p.~106854, 2022.
+\texttt{doi:10.1016/j.compstruc.2022.106854}
+
+\bibitem{burman2020}
+E.~Burman, P.~Hansbo, M.~G.~Larson,
+``Cut Bogner-Fox-Schmit elements for plates,''
+\textit{Adv.\ Model.\ Simul.\ Eng.\ Sci.}, vol.~7, no.~27, 2020.
+\texttt{doi:10.1186/s40323-020-00164-3}
+
+\bibitem{shellFCM2011}
+D.~Schillinger, M.~Ruess, N.~Zander, Y.~Bazilevs, A.~D\"{u}ster, E.~Rank,
+``Small and large deformation analysis with the $p$- and B-spline versions
+of the Finite Cell Method,''
+\textit{Comput.\ Methods Appl.\ Mech.\ Eng.}, vol.~211, 2011.
+
+\bibitem{duy2021}
+R.~Duy,
+\textit{Fictitious Domain Approach for Optimizing Stability Boundaries of
+Plates with Cutouts},
+Master's thesis, TU~Wien, Vienna, Austria, 2021.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Header / Footer ***
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand*{\chapterpagestyle}{newchapter}
+\renewcommand*{\chaptermarkformat}{}
+\renewcommand*{\sectionmarkformat}{}
+\pagestyle{scrheadings} 
+
+\newpagestyle{newchapter}{{\pagemark \hfill}{\pagemark \hfill }{\hfill \hfill \pagemark}}{{\hfill}{\hfill}{\hfill}}
+\ihead[\headmark]{\headmark}
+\chead[]{}
+\ohead[\pagemark]{\pagemark}
+\ifoot[]{}
+\cfoot[]{}
+\ofoot[]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpagestyle{leer}{{\hfill}{\hfill}{\hfill}}{{\hfill}{\hfill}{\hfill}}

@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Page layout ***
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\typearea[18mm]{19}
+\clubpenalty=10000
+\widowpenalty=10000
+\interlinepenalty=1000
+\usepackage[labelfont=bf]{caption}
+\sloppy
+\hbadness2000 \vbadness2000
+\setlength{\intextsep}{12pt plus 2pt minus 2pt}
+%\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
+%\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\belowcaptionskip}{0pt}
+\setlength{\abovecaptionskip}{6pt}
+\parindent=0mm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Numbering depth ***
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Headers ***
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setkomafont{disposition}{\normalcolor\bfseries}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Numbering ***
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}
+\renewcommand{\theequation}{\arabic{chapter}-\arabic{equation}}
+\renewcommand{\thetable}{\arabic{chapter}-\arabic{table}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Figures ***
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\figurename}{Fig.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** References to equations, figures, tables and chapters ***
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\gl}[1]{Eq.~\eqref{#1}}
+\newcommand{\abb}[1]{Fig.~\ref{#1}}
+\newcommand{\tab}[1]{Tab.~\ref{#1}}
+\newcommand{\kap}[1]{Chapter~\ref{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

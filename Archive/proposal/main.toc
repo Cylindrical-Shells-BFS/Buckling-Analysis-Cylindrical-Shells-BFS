@@ -1,0 +1,20 @@
+\contentsline {section}{\numberline {1}Introductory Paragraph}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Problem Statement and Importance}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Scope of the Project}{1}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Brief State of the Art}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Review of Relevant Literature}{1}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Identified Gap}{2}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Open Research Question}{2}{section.3}%
+\contentsline {section}{\numberline {4}Methodology}{2}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Objectives and Techniques}{2}{subsection.4.1}%
+\contentsline {paragraph}{\numberline {4.1.0.1}Phase 1 --- Cylinder geometry and mesh.}{2}{paragraph.4.1.0.1}%
+\contentsline {paragraph}{\numberline {4.1.0.2}Phase 2 --- Pre-buckling in-plane stress analysis.}{2}{paragraph.4.1.0.2}%
+\contentsline {paragraph}{\numberline {4.1.0.3}Phase 3 --- Geometric stiffness and buckling eigenvalue.}{2}{paragraph.4.1.0.3}%
+\contentsline {paragraph}{\numberline {4.1.0.4}Phase 4 --- Validation and post-processing.}{2}{paragraph.4.1.0.4}%
+\contentsline {subsection}{\numberline {4.2}Simulation Tools}{2}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Anticipated Limitations}{2}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Outcome}{2}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Planned Results}{2}{subsection.5.1}%
+\contentsfinish 
+\contentsline {subsection}{\numberline {5.2}Contribution to Knowledge}{3}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Conclusion}{3}{section.6}%

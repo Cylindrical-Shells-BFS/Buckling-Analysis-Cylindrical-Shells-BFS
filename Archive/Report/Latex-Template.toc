@@ -1,0 +1,17 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Formale Elemente}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Kapitelreferenzen}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Subsection}{1}{subsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1.1}Subsubsection}{1}{subsubsection.1.1.1.1}%
+\contentsline {paragraph}{\nonumberline Paragraph}{1}{paragraph*.3}%
+\contentsline {section}{\numberline {1.2}Bilder}{2}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Ein Bild}{2}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Zwei Bilder horizontal}{3}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Zwei Bilder vertikal}{4}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Gleichungen}{5}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Tabellen}{6}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Fusznoten}{8}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Literaturverweise}{9}{section.1.6}%
+\contentsline {chapter}{\numberline {A}Anhang}{10}{appendix.A}%
+\contentsline {chapter}{\nonumberline Bibliography}{11}{chapter*.9}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

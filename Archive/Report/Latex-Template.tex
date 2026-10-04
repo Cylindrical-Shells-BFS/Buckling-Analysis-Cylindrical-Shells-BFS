@@ -1,0 +1,56 @@
+% Definition of new commands
+\newcommand{\leadingzero}[1]{\ifnum #1<10 0\the#1\else\the#1\fi}
+\newcommand{\thedate}{\leadingzero{\day}.\leadingzero{\month}.\leadingzero{\year}}
+\newcommand{\thetitle}{Title}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document class definition
+\documentclass[a4paper,
+               12pt,
+               oneside,
+               numbers=noenddot,
+               headinclude,
+               footinclude=false,
+               headsepline,
+               bibliography=totoc,
+               openany,
+               cleardoublepage=empty,
+               fleqn]{scrbook}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Packages ***
+\input{./misc/packages.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Header / Footer ***
+\input{./misc/header_footer.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Page-Layout ***
+\input{./misc/layout.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Commands and  ***
+\input{./misc/shortcuts.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Vorgeplaenkel ***
+\frontmatter
+
+\pagenumbering{Roman}
+
+\include{./01_frontmatter/title}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Main part
+\mainmatter
+
+\include{./02_mainmatter/chap_formale_elemente}
+\include{./02_mainmatter/chap_anhang}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+\bibliographystyle{ieeetr}
+\bibliography{./03_backmatter/literature}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

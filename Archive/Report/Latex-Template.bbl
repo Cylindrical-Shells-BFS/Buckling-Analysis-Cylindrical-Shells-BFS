@@ -1,0 +1,11 @@
+\begin{thebibliography}{1}
+
+\bibitem{ein_artikel}
+A.~B. Name, C.~D. Name2, and E.~F. Name3, ``Titel des artikels,'' {\em
+  Journal}, vol.~19, pp.~1593 -- 1656, 1983.
+
+\bibitem{eine_doktorarbeit}
+A.~B. Name, {\em Titel der Doktorarbeit}.
+\newblock PhD thesis, Universität xy, 2003.
+
+\end{thebibliography}

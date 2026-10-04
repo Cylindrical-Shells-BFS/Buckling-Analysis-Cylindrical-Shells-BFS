@@ -1,0 +1,80 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Gleichungen ***
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\section{Gleichungen}\label{sec:gleichungen}
+%
+Dies ist eine einfache Gleichung
+%
+\begin{eqnarray}\label{gl:einfache_gleichung}
+  u_i & = & \omega_{i_z}\,r_i \quad \text{mit} \quad i=I,II\quad.
+\end{eqnarray}
+%
+Die Referenz auf die Gleichung erfolgt durch \gl{gl:einfache_gleichung}.\\
+Die Formatierung ist unter ./formatforlagen/shortcuts.tex bearbeitbar.\\\\\\\\
+%
+Dies ist eine kompliziertere Gleichung
+%
+\begin{eqnarray}\label{gl:kompliziertere_gleichung}
+  \underbrace{\dfrac{\partial}{\partial x} \left(\dfrac{\rho\, h^3}{12 \eta} \dfrac{\partial p_h}{\partial x}\right)
+  + \dfrac{\partial}{\partial y} \left(\dfrac{\rho\, h^3}{12 \eta} \dfrac{\partial p_h}{\partial y}\right)}_{\text{Poiseuille-Strömung}}
+  = \underbrace{\rule[-11pt]{0pt}{0pt}\dfrac{(u_I+u_{II})}{2} \dfrac{\partial(\rho\, h)}{\partial x}}_{\text{Couette-Strömung}}
+  + \underbrace{\rule[-11pt]{0pt}{0pt}\dfrac{\partial(\rho\, h)}{\partial t}}_{\rule[9pt]{0pt}{0pt}\text{Verdrängungs-Strömung}}\quad.
+\end{eqnarray}
+%
+Die Referenz auf die Gleichung erfolgt durch \gl{gl:kompliziertere_gleichung}.\\
+Die Formatierung ist unter ./formatforlagen/shortcuts.tex bearbeitbar.\\\\\\\\
+%
+Dies ist eine mehrzeilige Gleichung
+%
+\begin{eqnarray}\label{gl:mehrzeilige_gleichung}
+  \rho \left( \dfrac{\partial u}{\partial t} + u\, \dfrac{\partial u}{\partial x}
+                                             + v\, \dfrac{\partial u}{\partial y}
+                                             + w\, \dfrac{\partial u}{\partial z} \right)
+  & = & s_x - \dfrac{\partial p_h}{\partial x} \nonumber \\
+  & + & \dfrac{\partial}{\partial x} \left[ \eta \left( 2 \dfrac{\partial u}{\partial x}
+                                                        - \dfrac{2}{3} \left( \dfrac{\partial u}{\partial x}
+                                                                            + \dfrac{\partial v}{\partial y}
+                                                                            + \dfrac{\partial w}{\partial z}\right) \right) \right] \nonumber \\
+  & + & \dfrac{\partial}{\partial y} \left[ \eta \left( \dfrac{\partial u}{\partial y}
+                                                      + \dfrac{\partial v}{\partial x} \right) \right]
+      + \dfrac{\partial}{\partial z} \left[ \eta \left( \dfrac{\partial u}{\partial z}
+                                                      + \dfrac{\partial w}{\partial x} \right) \right]\quad, \nonumber \\
+  %
+  %
+  %
+  \rho \left( \dfrac{\partial v}{\partial t} + u\, \dfrac{\partial v}{\partial x}
+                                             + v\, \dfrac{\partial v}{\partial y}
+                                             + w\, \dfrac{\partial v}{\partial z} \right)
+  & = & s_y - \dfrac{\partial p_h}{\partial y} \\
+  & + & \dfrac{\partial}{\partial y} \left[ \eta \left( 2 \dfrac{\partial v}{\partial y}
+                                                        - \dfrac{2}{3} \left( \dfrac{\partial u}{\partial x}
+                                                                            + \dfrac{\partial v}{\partial y}
+                                                                            + \dfrac{\partial w}{\partial z}\right) \right) \right] \nonumber \\
+  & + & \dfrac{\partial}{\partial x} \left[ \eta \left( \dfrac{\partial v}{\partial x}
+                                                      + \dfrac{\partial u}{\partial y} \right) \right]
+      + \dfrac{\partial}{\partial z} \left[ \eta \left( \dfrac{\partial v}{\partial z}
+                                                      + \dfrac{\partial w}{\partial y} \right) \right]\quad, \nonumber \\
+  %
+  %
+  %
+  \rho \left( \dfrac{\partial w}{\partial t} + u\, \dfrac{\partial w}{\partial x}
+                                             + v\, \dfrac{\partial w}{\partial y}
+                                             + w\, \dfrac{\partial w}{\partial z} \right)
+  & = & s_z - \dfrac{\partial p_h}{\partial z} \nonumber \\
+  & + & \dfrac{\partial}{\partial z} \left[ \eta \left( 2 \dfrac{\partial w}{\partial z}
+                                                        - \dfrac{2}{3} \left( \dfrac{\partial u}{\partial x}
+                                                                            + \dfrac{\partial v}{\partial y}
+                                                                            + \dfrac{\partial w}{\partial z}\right) \right) \right] \nonumber \\
+  & + & \dfrac{\partial}{\partial x} \left[ \eta \left( \dfrac{\partial w}{\partial x}
+                                                      + \dfrac{\partial u}{\partial z} \right) \right]
+      + \dfrac{\partial}{\partial z} \left[ \eta \left( \dfrac{\partial w}{\partial y}
+                                                      + \dfrac{\partial v}{\partial z} \right) \right] \nonumber\quad.
+\end{eqnarray}
+%
+Die Referenz auf die Gleichung erfolgt durch \gl{gl:mehrzeilige_gleichung}.\\
+Die Formatierung ist unter ./formatforlagen/shortcuts.tex bearbeitbar.
+%
+\newpage
+%
+

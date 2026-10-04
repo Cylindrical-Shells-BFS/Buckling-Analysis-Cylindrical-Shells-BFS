@@ -1,0 +1,69 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Tabellen ***
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\section{Tabellen}\label{sec:tabellen}
+%
+Dies ist eine einfache Gleichung
+
+\begin{table}[h]
+  \renewcommand{\arraystretch}{1.2} % kuenstliche Erhoehung der Zeilenhoehe
+  \caption{Parameter - quasistatisches Vergleichsmodell mit Temperatureinfluss}
+  \label{tab:einfache_tabelle}
+  \vspace{0.5cm} 
+  \begin{tabular}{|l|l|l|c|}
+    \hline
+                & \textbf{Parameter} & \textbf{Formelzeichen} & \textbf{Wert}\\
+    \hline
+    Lager         & Durchmesser (innen)         & $d_I$         & $100 mm$\\
+                  & Durchmesser (außen)         & $d_a$         & $200 mm$\\
+                  & Breite                      & $b$           & $200 mm$\\ 
+                  & Kaltspiel ($20\grad C$)     & $\Delta r$    & $123 \mu m$\\
+    \hline
+    Ölzuführung   & Lage                        & $\varphi_{T}$     & $90\grad$\\
+                  & Länge                       & $x_{T}$       & $15.708 mm \entspricht 18\grad$\\
+                  & Breite (zentrisch)          & $y_{T}$       & $70 mm $\\
+                  & Zuführdruck                 & $p_{T}$       & $0.07 bar$\\
+                  & Zuführtemperatur            & $T_{T}$       & $40\grad C$\\
+  \hline
+  \end{tabular}
+  \renewcommand{\arraystretch}{1.0} % kuenstliche Erhoehung der Zeilenhoehe zuruecknehmen
+\end{table}
+%
+Die Referenz auf die Tabelle erfolgt durch \tab{tab:einfache_tabelle}.\\
+Die Formatierung ist unter ./formatforlagen/shortcuts.tex bearbeitbar.\\\\\\\\
+%
+Dies ist eine komplexere Tabelle
+\begin{table}[H]
+    \renewcommand{\arraystretch}{1.5} % kuenstliche Erhoehung der Zeilenhoehe
+    \caption{Zuordnung der Geschwindigkeits- und Beschleunigungskomponenten}%
+    \label{tab:komplexere_tabelle}%
+    \vspace{0.5cm}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \multicolumn{3}{|c|}{Geschwindigkeits- und Beschleunigungskomponenten eines elastischen Körpers}\\%
+        \hline %\hline %
+        \multirow{2}{*}{Komponenten der Geschwindigkeit bzgl.} & $\un{r}_A' + \un{u}'$ & Translation\\%
+        \cline{2-3}
+                                                               & $\widetilde{\un{\un{\omega}}} \, (\un{r}_A + \un{c} + \un{u})$ & Rotation\\%
+        \hline %\hline %
+        \multirow{4}{*}{Komponenten der Beschleunigung bzgl.} & $\un{r}_A'' + \un{u}''$ & Translation\\%
+        \cline{2-3}
+                                                               & $\dot{\widetilde{\un{\un{\omega}}}} \, (\un{r}_A + \un{c} + \un{u})$ & Rotation\\%
+        \cline{2-3}
+                                                               & $2\,\widetilde{\un{\un{\omega}}} \, (\un{r}_A' + \un{u}')$ & gyroskopische Effekte\\%
+        \cline{2-3}
+                                                               & $\widetilde{\un{\un{\omega}}} \, \widetilde{\un{\un{\omega}}} \, (\un{r}_A + \un{c} + \un{u})$ & zentrifugale Effekte\\%
+        \hline%\hline
+        \multicolumn{1}{|l|}{Starrkörperbewegung: }& \multicolumn{2}{l|}{ $\un{r}_A + \un{c}$}\\%
+        \multicolumn{1}{|l|}{elastische Deformation: } & \multicolumn{2}{l|}{ $\un{u}$}\\%
+        \hline
+    \end{tabular}
+    \renewcommand{\arraystretch}{1.0} % kuenstliche Erhoehung der Zeilenhoehe zuruecknehmen
+\end{table}
+%
+Die Referenz auf die Tabelle erfolgt durch \tab{tab:komplexere_tabelle}.\\
+Die Formatierung ist unter ./formatforlagen/shortcuts.tex bearbeitbar.\\\\\\\\
+%
+\newpage
+%

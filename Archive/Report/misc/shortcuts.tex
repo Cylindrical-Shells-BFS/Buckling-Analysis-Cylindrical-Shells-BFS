@@ -1,0 +1,84 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Shortcuts ***
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Figures ***
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** One figure ***
+\newcommand{\bild}[4]{
+  \begin{figure}[htbp]
+    \begin{center}
+      \includegraphics[width=#2]{#1}\\
+      \caption{#3}\label{#4}
+    \end{center}
+  \end{figure}}
+% *** One figure placed here ***
+\newcommand{\bildhier}[4]{
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=#2]{#1}\\
+      \caption{#3}\label{#4}
+    \end{center}
+  \end{figure}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Two figures side by side ***
+\newcommand{\bildzweihor}[7]{
+  \begin{figure}[htbp]
+    \begin{center}
+      \begin{minipage}[c]{0.48\textwidth}
+        \includegraphics[width=#2]{#1}
+      \end{minipage}
+      \hspace{#7}
+      \begin{minipage}[c]{0.48\textwidth}
+        \includegraphics[width=#4]{#3}
+      \end{minipage}
+      \vspace{5pt}
+      \caption{#5}
+      \label{#6}
+    \end{center}
+  \end{figure}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** Two figures beneath each other ***
+\newcommand{\bildzweiver}[7]{
+  \begin{figure}[htbp]
+    \begin{center}
+      \includegraphics[width=#2]{#1}\\
+      \vspace{#7}    
+      \includegraphics[width=#4]{#3}
+      \caption{#5}
+      \label{#6}
+    \end{center}
+  \end{figure}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Shorter command
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\un}{\underline}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ov}{\overline}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\mf}{\mathbf}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\negs}{\!\!\!}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bs}{\boldsymbol}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Promille
+\newcommand{\promille}{
+  \relax\ifmmode\promillezeichen
+    \else\leavevmode\(\mathsurround=0pt\promillezeichen\)\fi}
+  \newcommand{\promillezeichen}{
+    \kern-.05em%
+    \raise.5ex\hbox{\the\scriptfont0 0}
+    \kern-.15em/\kern-.15em%
+    \lower.25ex\hbox{\the\scriptfont0 00}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Degree
+\newcommand{\grad}{\ensuremath{^\circ}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Signum-function
+\DeclareMathOperator \sgn {sgn}
+% absolute value
+\newcommand{\abs}[1]{\ensuremath{\left\vert#1\right\vert}}
+% estimated
+\newcommand{\entspricht}{\ensuremath{\mathrel{\widehat{=}}}} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
